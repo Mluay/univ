@@ -1,0 +1,883 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNIVERSITY GUIDE</title>
+    <link rel="stylesheet" href="{% static 'css/newspage.css' %}" />
+    <!-- Unicons CSS -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6f2e933f9c.js" crossorigin="anonymous"></script>
+    <style>
+
+:root {
+  --hoverBgColor: #503bff;
+  --hoverBgColor2: #8293ff;
+}
+
+.container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 97vh;
+}
+
+.container .box {
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  background-color: white;
+  margin: 20px;
+  position: relative;
+  box-shadow: 0px 0px 15px background;
+  transition: .3s all ease-in-out;
+}
+
+.container .box .boxContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+}
+
+.container .box .boxContent .icon {
+  color: #8293ff;
+  font-size: 48px;
+  padding: 15px;
+}
+
+.container .box .boxContent .title {
+  font-size: 24px;
+  color: #8293ff;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.container .box .boxContent .desc {
+  color: #8293ff;
+  font-size: 15px;
+  height: 20%;
+}
+
+.container .box a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.container .box:hover {
+  background: linear-gradient(130deg, var(--hoverBgColor) 0%, var(--hoverBgColor2) 100%);
+  box-shadow: none;
+}
+
+.container .box:hover .icon,
+.container .box:hover .title,
+.container .box:hover .desc {
+  color: white;
+  transition: .3s all ease-in-out;
+}
+
+    </style>
+<style>
+  .rtl-label {
+  direction:rtl !important;
+  text-align: right !important; 
+  display: flex !important;
+  margin-right: 10px !important;
+}
+  .content{
+    flex-direction: column;
+  }
+
+  .fs-lg{
+    font-size: large;
+  }
+
+</style>  
+
+
+<style>
+  .avg-modal-body {
+    position: relative;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+
+
+<style>
+.social-media-dashboard {
+  text-align: center;
+}
+
+.social-media-dashboard ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.social-media-dashboard ul li {
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.social-media-dashboard ul li a {
+  color: #fff; 
+  text-decoration: none;
+  font-size: 24px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: #333;
+  transition: background-color 0.3s ease;
+}
+
+.social-media-dashboard ul li a:hover {
+  background-color: #007bff;
+}
+
+.rtl{
+  direction: rtl;
+  text-align: right;
+}
+
+</style>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(24, 99, 88);box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);padding-left: 60px;padding-right: 60px;">
+      <h2 class="navbar-brand logo text-white">UNIVERSITY GUIDE</h2>
+    
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="uil uil-bars text-white"></i>
+      </button>
+    
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item active">
+                <a class="nav-link text-white" href="{% url 'index' %}">الصفحة الرئيسية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'univs' %}">جميع الجامعات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'h_basied' %}">دليلك للاختيار</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'news_posts' %}">الاخبار</a>
+              </li>
+            </ul>
+    
+        <form class="form-inline my-2 my-lg-0">
+          <i class="uil uil-search search-icon text-white" id="searchIcon" style="font-size: x-large;"></i>
+          <div class="search-box collapse">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search" style="width: 309px;">
+          </div>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <!-- Box 1 -->
+      <div class="box" data-toggle="modal" data-target="#Modal1">
+        <div class="boxContent">
+          <i class="fa-solid fa-calculator icon"></i>
+          <h1 class="title">حساب المعدل</h1>
+          <p class="desc">يمكنك حساب المعدل عن طريق ادخال درجاتك</p>
+        </div>
+      </div>
+<!-- Modal 1 -->
+<div class="modal fade" id="Modal1" tabindex="-1" aria-labelledby="ModalLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title rtl-label" id="ModalLabel1">
+          <div class="rtl-label">
+            حساب المعدل
+          </div>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="avg-modal-body">
+        <div class="custom-control custom-switch rtl-label" dir="rtl">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1">
+            <label class="custom-control-label rtl-label fs-lg" for="customSwitch1">انا ادبي</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="exam">
+          <label class="form-check-label" for="defaultCheck1">
+            امتحان لغة فرنسيه( لغات )
+          </label>
+      </div>
+      <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="no_fail">
+          <label class="form-check-label" for="defaultCheck2">
+            عدم الرسوب
+          </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="mar">
+        <label class="form-check-label" for="defaultCheck2">
+          ذوي الشهداء 
+        </label>
+    </div>
+        <div id="inputContainer">
+            <!-- Input labels will be added here -->
+        </div>
+        <button id="calculateAvgBtn" class="btn btn-primary mt-3 rtl-label">احسب المعدل</button>
+        <p id="avgResult" class="rtl-label mt-3 fs-lg"></p>
+    </div>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal 1 -->
+<!-- end box1 -->
+
+
+<!-- Box 2 -->
+<div class="box" data-toggle="modal" data-target="#Modal2">
+  <div class="boxContent">
+    <i class="fa-solid fa-building-columns icon"></i>
+    <h1 class="title">الموازي</h1>
+    <p class="desc">معلومات حول الدراسة الموازية</p>
+  </div>
+</div>
+<!-- Modal 2 -->
+<div class="modal fade" id="Modal2" tabindex="-1" aria-labelledby="ModalLabel2" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="ModalLabel2">ضوابط التعليم الحكومي الخاص الصباحي (الموازي)</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body rtl-label">
+  <ol>
+    <li><span style="color: #000000;"><strong>ان يكون الطالب مستوفياً لكافة الشروط المتعلقة بالقبول المركزي.</strong></span></li>
+    <li><span style="color: #000000;"><strong>يحق لطلبة من خريجي الدراسة الاعدادية للسنتين الدراسيتين 2020/2019 و 2020/2021 التقديـم للقبول ضمن القناة بغض النظر فيما إذا كان لدييـهم قبول من عدمه أو كانوا ممن سبق لهم الالتحاق بالدراستين المسائية او الاهلية او الكليات التابعة للوقفين او من المقبولين ضمن القناة نفسها.</strong></span></li>
+    <li><span style="color: #000000;"><strong>يحق للطلبة من خريجي الدراسة المهنية والاسلامية للسنة السابقة التقديم والتنافس مع اقرانهم للقبول ضمن هذه القناة .</strong></span></li>
+    <li><span style="color: #000000;"><strong>يجب ان لايقل معدل الطالب المتقدم للقبول ضمن القناة الموازي اعلاه عن :-</strong></span>
+    <ol>
+    <li><span style="color: #000000;"><strong>3 درجات عن الحد الادنى للقبول في كليات الطب على مستوى الجامعات العراقية كافة.</strong></span></li>
+    <li><span style="color: #000000;"><strong>3 درجات للقبول في كليات (طب الاسنان , التمريض , التقنيات الصحية والطبية , المعاهد التقنية الطبية ) على مستوى المحافظة الواحدة للتخصص المناظر.</strong></span></li>
+    <li><span style="color: #000000;"><strong>4 درجات عن الحد الادنى للقبول في الكليات المجموعة الهندسية والمعاهد التقنية الهندسية.</strong></span></li>
+    <li><span style="color: #000000;"><strong>5 درجات عن الحد الادنى لقبول في كليات العلوم.</strong></span></li>
+    <li><span style="color: #000000;"><strong>6 درجات عن الحد الادنى لقبول في باقي التخصصات ومن ضمنها الطب البيطري.</strong></span></li>
+    </ol>
+    </li>
+    <li><span style="color: #000000;"><strong>يلغى القبول السابق (مركزي , مباشر , مسائي, اهلي) للطالب حال مباشرته بالدراسة ضمن قناة الموازي , ولايحق له العودة لقبوله السابق لأي سبب كان.</strong></span></li>
+    <li><span style="color: #000000;"><strong>تكون خطة القبول لهذه القناة زيادة على خطة القبول المركزي وليست جزءا منها.</strong></span></li>
+    <li><span style="color: #000000;"><strong>يكون توزيع المقاعد لخطة القبول لهذه القناة بنسبة 75% لخريجي الدراسة الاعدادية للسنة الحالية و 25% لخريجي السنة الدراسية السابقة.</strong></span></li>
+    <li><span style="color: #000000;"><strong>يتم توزيع الطلبة على الاقسام بعد ترتيبهم من الاعلى الى الادنى وحسب معدلاتهم والخطة المقررة لكل قسم وفق النسبة المشار اليها في الفقرة (10) اعلاه.</strong></span></li>
+    <li><span style="color: #000000;"><strong>يحق للطلبة تقديم طلبات النقل الى الكليات /المعاهد المناظرة في الجامعات الاخرى ضمن نفس القناة مع مراعاة ضوابط الانتقال الواردة في البند (ح-1 من الفصل الثامن من ضوابط واجراءات شؤون الطلبة ) على ان يتم استحصال نسبة 125% من الاجور الدراسية لسنة الانتقال موزعة بواقع (50% الى الجامعة المنقول منها الطالب و75% الى الجامعة المنقول اليها ويستمر استحصال ذات النسبة البالغة 125% من الطالب لبقية المراحل على ان يكون توزيعها بواقع ( 25% من الاجور الدراسية الى الجامعة المنقول منها و100% الى الجامعة المنقول اليها).</strong></span></li>
+    </ol>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal 2 -->
+<!-- end box2 -->
+
+
+<!-- Box 3 -->
+<div class="box" data-toggle="modal" data-target="#Modal3">
+  <div class="boxContent">
+    <i class="fa-solid fa-business-time icon"></i>
+    <h1 class="title">المسائي</h1>
+    <p class="desc">معلومات حول الدراسة المسائية</p>
+  </div>
+</div>
+<!-- Modal 3 -->
+<div class="modal fade" id="Modal3" tabindex="-1" aria-labelledby="ModalLabel3" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="ModalLabel3">المسائي</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div dir="rtl" style="text-align: right;padding: 12px;"><h2><span style="color: #003366;"><strong>ضوابط التقديم في الدراسة المسائية في الجامعات وشروطه:</strong></span></h2>
+    <h3><span style="color: #003366;"><strong>ج-1- الشروط العامة للتقديم:</strong></span></h3>
+    <ol>
+    <li><span style="color: #003366;"><strong> عراقي الجنسية.</strong></span></li>
+    <li><span style="color: #003366;"><strong> حائز على شهادة الد ارسة الاعدادية العراقية، معززة بتصديق من المديرية العامة للتربية في المحافظة أو على شهادة تعادلها.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يحق لخريجي الدراسة الاعدادية للسنة الدراسية الحالية الحصول على الامتيازات ذاتها التي حصل عليها أقرانهم المتقدمو ن للقبول المركزي عند احتساب المجموع ألغراض المفاضلة في القبول.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يشترط في الطالب المتقدم للقبول في الدراسة المسائية في الكليات أن يكون حاصل على</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>معدل لا يقل عن (60 %) و للهيئة المشرفة على الدراسة المسائية تحديد حدود تقديم أعلى </strong></span></p>
+    <p><span style="color: #003366;"><strong>مما تم تحديده آنفا.</strong></span></p>
+    <ol start="5">
+    <li><span style="color: #003366;"><strong> تكون الحدود الدنيا للقبول في الدراسة المسائية في كليات (الهندسة، العلوم، الزراعة،</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>التمريض) بالاعتماد على الحد الادنى للقبول في الكلية للدراسة الصباحية/القبول المركزي</strong></span></p>
+    <p><span style="color: #003366;"><strong>على لا يقل المعدل عن (65 %).</strong></span></p>
+    <ol start="6">
+    <li><span style="color: #003366;"><strong> تستثنى الطالبات من خريجات الفرعين العلمي (أحيائي، تطبيقي) والادبي الراغبات في التقديم إلى كليات التربية البدنية وعلوم الرياضة وأقسام و التربية البدنية وعلوم الرياضة من شرط المعدل الوارد في الفقرة (4) أعاله على لا يقل معدلهن عن (55 %).</strong></span></li>
+    <li><span style="color: #003366;"><strong> يحق لألبطال من (مرشحي اللجنة الاولمبية) من خريجي الفر عين العلمي (أحيائي، تطبيقي) و الادبي التقديم إلى كليات التربية البدنية وعلوم الرياضة وأقسام و التربية البدنية وعلوم الرياضة على لا تزيد نسبتهم عن (5 %) من خطة القبول استثناء من شرط المعدل.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يحق للموهوبين والابطال من خريجي الاعداديات المهنية (الصناعي والتجاري والزارعي)</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>التقديم إلى كليات الفنون الجميلة والتربية الفنية وكليات التربية البدنية وعلوم الر ياضة وقسمي التربية الفنية و التربية البدنية وعلوم الرياضة في كليات التربية والتربية األساسية على الاتزيد نسبتهم عن (10 %) من خطة القبول وبمعدل لا يقل عن 60 %.</strong></span></p>
+    <ol start="9">
+    <li><span style="color: #003366;"><strong> يحق للطلبة من خريجي معاهد الفنون الجميلة التقديم للقبول في الدراسة المسائية وبنسبة </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>(10 %) من خطة قبول الاقسام في كليات الفنون الجميلة.</strong></span></p>
+    <ol start="10">
+    <li><span style="color: #003366;"><strong> يحق لخريجي الدراسة الاعدادية المهنية للفروع (الصناعي والتجاري والز ارعي والفنون التطبيقية) و إعداديات التمريض والقبالة والتوليد التقديم للدراسة المسائية بحسب التخصصات المناظرة على أال تزيد نسبتهم عن (10 %) من خطة القبول للقسم المناظر، و لاتزيد نسبة خريجي الفرع التجاري عن(20 %) من خطة القبول للأقسام المناظرة في كلية الادارة والاقتصاد وبمعدل لا يقل عن (60 %) (الملحق 7).</strong></span></li>
+    <li><span style="color: #003366;"><strong> يحق لخريجي الدراسة الاعدادية الاسلامية/ وزارة التربية وخريجي الاعداديات الاسلامية </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>التابعة للوقفين(باستثناء خريجي الامتحانات الخارجية في الاعداديات التابعة للوقفين ممن </strong></span></p>
+    <p><span style="color: #003366;"><strong>لم يجتازوا الامتحان التقويمي بنجاح المقرر في وزارة التربية) التقديم للدراسة المسائية في</strong></span></p>
+    <p><span style="color: #003366;"><strong>كلية العلوم الاسلامية حصرا (مع مراعاة ما ورد في الفقرة (4) من البند (ب-6) على الا تزيد نسبتهم عن (10 %) من خطة القبول للكلية وبمعدل لا يقل عن (60 %).</strong></span></p>
+    <ol start="12">
+    <li><span style="color: #003366;"><strong> يتم الالتزام بالنسب المحددة لقبول فئات الطلبة أعاله وفي حال عدم استيفاء النسبة المحددة من خطة القبول يتم تعويضها من خريجي الفرعين العلمي والادبي حصرا.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يحق لخريجي الدراسة الاعدادية التقديم للدراسة المسائية في المعاهد ويحسم معدل القبول بحسب المنافسة على المقاعد المتاحة ولكل قسم علمي.</strong></span></li>
+    <li><span style="color: #003366;"><strong> ترشح الجامعة الطلبة للدراسة في الكلية/المعهد وفي القسم الذي يؤهلهم اليه مجموعهم</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>وحسب تسلسل رغباتهم.</strong></span></p>
+    <ol start="15">
+    <li><span style="color: #003366;"><strong> لا يحق لخريجي المعاهد التقديم للقبول في الدراسة المسائية، عدا ما تم ذكره في الفقرة </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>(9) اعلاه. و يتم ترشيح الطلبة من خريجي المعاهد الـ (10 %) الاوائل الدراسة المسائية</strong></span></p>
+    <p><span style="color: #003366;"><strong>للقبول في الكليات و بحسب الاختصاصات المتناظرة وفي سنة تخرجهم حصرا من قبل الوزارة.</strong></span></p>
+    <ol start="16">
+    <li><span style="color: #003366;"><strong> يحق للمعلمين المستمرين بالخدمة التقديم الى كليات التربية والتربية االساسية بغض النظر عن خلفية دراستهم في الاعدادية اي بغض النظر فيما اذا كانت دراستهم مهنية او اكاديمية على الا تزيد نسبتهم عن (5 %) من خطة القبول في القسم ويكون قبولهم زيادة على خطة القبول.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يحق للطلبة المرقنة قيودهم في الدراسات الصباحية التقديم للدراسة المسائية في كليات </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>غير الكليات التي رقنت قيودهم فيها على الا يكون ترقين القيد لاسباب تتعلق بالغش أو</strong></span></p>
+    <p><span style="color: #003366;"><strong>المحاولة فيه أو كانوا معاقبين انضباطيا، مع وجوب كونهم مستوفين للشروط العامة الاخرى.</strong></span></p>
+    <ol start="18">
+    <li><span style="color: #003366;"><strong> يحق للطلبة المرقنة قيودهم في الدارسات المسائية التقديم للدارسة في كليات مسائية أخرى على ألا يكونوا ممن سبق ترقين قيودهم في الدراسات الصباحية وألا يكون ترقين القيد لاسباب تتعلق بالغش أو المحاولة فيه أو كانوا معاقبين انضباطيا مع وجوب كونهم مستوفين للشروط العامة الاخرى.</strong></span></li>
+    <li><span style="color: #003366;"><strong> لا يحق للطالب الذي أكمل إجراءات التسجيل في قبوله المركزي التسجيل في الدراسة </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>المسائية إلا إذا قام بتقديم طلب لترقين قيده بعد تسجيله وال يحق له العودة لقبوله المركزي</strong></span></p>
+    <p><span style="color: #003366;"><strong>مرة أخرى، مع مراعاة ما ورد في الفقرة (5) من البند (ح-1) من الفصل الثامن في حالة </strong></span></p>
+    <p><span style="color: #003366;"><strong>تقديمه للدراسة المسائية في الكلية نفسها. </strong></span></p>
+    <ol start="20">
+    <li><span style="color: #003366;"><strong> يتم قبول الطلبة غير العراقيين (المقيمين) من الحاصلين على شهادة الثانوية العراقية قبولا أوليا في الدراسة المسائية وعليهم مراجعة الوزارة لبيان اعفائهم من الاجور الدراسية بالعملة الاجنبية وخالل (30) يوما من إصدار امر قبولهم ويتحمل الطالب والكلية/المعهد مسؤولية استمراره بالدراسة من دون حصوله على كتاب إعفاء.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يلتزم منتسبو القوات المسلحة وجهاز المخابرات وقوى الامن الداخلي وجهاز الامن الوطني والاجهزة الامنية الاخرى بجلب كتاب يؤيد عدم ممانعة دوائرهم للقبول في الدراسة</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>المسائية/قناة القبول العام.</strong></span></p>
+    <ol start="22">
+    <li><span style="color: #003366;"><strong> يحق للفئة المشمولة بالامر الديواني 122 لسنة 2017 من ذوي ضحايا(الابادة الجماعية</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>الكرد الفيليين) التقديم في الكليات والمعاهد في الدراسة المسائية بنسبة (5 %) زيادة على</strong></span></p>
+    <p><span style="color: #003366;"><strong>الخطة المحددة و وفق التخصص المناظر استثناء من شرط المعدل للتنافس فيما بينهم على</strong></span></p>
+    <p><span style="color: #003366;"><strong>ان يتم تاييد ذلك من الجهات المختصة للفئة المذكورة أنفا.</strong></span></p>
+    <ol start="23">
+    <li><span style="color: #003366;"><strong> لا يحق للسادة الوزراء ومن هم بدرجتهم وأعضاء مجلس النواب وذوي الدرجات الخاصة</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>والمدارء العامون وأعضاء مجالس المحافظات و المجالس البلدية التقديم للقبول في الدراسة </strong></span></p>
+    <p><span style="color: #003366;"><strong>المسائية.</strong></span></p>
+    <ol start="24">
+    <li><span style="color: #003366;"><strong> يتم أخذ تعهد خطي من الطالب المتقدم للدراسة المسائية، يتضمن انه غير مشمول </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>بالدرجات الخاصة المبينة في الفقرة (23) أعاله وفق النموذج المبين في (الملحق 13) وفي</strong></span></p>
+    <p><span style="color: #003366;"><strong>حال ثبوت خالف ذلك يكتب إلى الوزارة إللغاء قبوله الموجود في الضوابط.</strong></span></p>
+    <ol start="25">
+    <li><span style="color: #003366;"><strong> يشمل جميع الطلبة المقبولين في السنوات السابقة و المستمرين حاليا في الدرسة المسائية بالتعهد المشار اليه في الفقرة (24) اعاله، و بخالفه تتحمل الكلية والقسم المعني مسؤلية ذلك.</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>ج-2- الاجور الدراسية:</strong></span></p>
+    <ol>
+    <li><span style="color: #003366;"><strong> تكون الاجور المستوفاة من الطلبة المقبولين للسنة الدراسية 2019-2018 بما لايزيد عن</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>الاتي: </strong></span></p>
+    <p><span style="color: #003366;"><strong>&nbsp;</strong></span></p>
+    <table>
+    <tbody>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>ت</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>الاختصاص</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>المبلغ كحد</strong></span><p></p>
+    <p><span style="color: #003366;"><strong>أعلى (دينار)</strong></span></p></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>1</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>كليات الهندسة والكليات التقنية الهندسية</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>3000000</strong></span></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>2</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>كليات التمريض و الكليات التقنية الصحية</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>2500000</strong></span></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>3</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>التخصصات العلمية (العلوم الصرفة، كلية الفنون التطبيقية، الاقسام العلمية في كلية التربية، الزراعة، الفنون الجميلة، التربية البدنية وعلوم الرياضة)</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>1650000</strong></span></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>4</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>كليات القانون، كلية الادارة والاقتصاد والكليات التقنية الادارية</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>1300000</strong></span></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>5</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>(العلوم السياسية، التربية للعلوم الانسانية، الاداب، العلوم الاسلامية،الاعلام) والتخصصات الانسانية الاخرى</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>1000000</strong></span></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>6</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>الطبية التقنية المعاهد</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>2500000</strong></span></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>7</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>التكنولوجية المعاهد</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>1500000</strong></span></td>
+    </tr>
+    <tr>
+    <td width="32"><span style="color: #003366;"><strong>8</strong></span></td>
+    <td width="406"><span style="color: #003366;"><strong>الادارية المعاهد</strong></span></td>
+    <td width="130"><span style="color: #003366;"><strong>1000000</strong></span></td>
+    </tr>
+    </tbody>
+    </table>
+    <p><span style="color: #003366;"><strong>&nbsp;</strong></span></p>
+    <ol start="2">
+    <li><span style="color: #003366;"><strong> يستمر الطلبة المنتظمو ن حاليا في الدراسة المسائية بدفع الاجور المحددة سابقا.</strong></span></li>
+    <li><span style="color: #003366;"><strong> للهيئة المشرفة تخفيض األجور الد ارسية عن الحد الاعلى المبين أعاله بناء على توصية</strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>من الكلية/المعهد المعني.</strong></span></p>
+    <ol start="4">
+    <li><span style="color: #003366;"><strong> لا يتم استيفاء الاجور الدارسية الا بعد التأكد من كون قبول الطالب أو استمراره بالدراسة </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>مطابقا للتعليمات والضوابط النافذة وبخالفه تتحمل الكلية والمعهد المسؤولية كاملة.</strong></span></p>
+    <ol start="5">
+    <li><span style="color: #003366;"><strong> في حال انسحاب الطالب من الدراسة و ألي سبب كان أو تأجيله للدراسة لا تعاد الاجور </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>الدراسية لتلك السنة وتستوفى منه الاجور المقررة عند تسجيل دوامة في السنة التالية.</strong></span></p>
+    <ol start="6">
+    <li><span style="color: #003366;"><strong> تتولى الهيئة المشرفة على الدراسة المسائية النظر بتخفيض الاجور الدراسية لأعضاء </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>الهيئة التدريسية في الجامعات أو الجامعات التقنية( المستمرين في الخدمة فقط ) وأوالدهم </strong></span></p>
+    <p><span style="color: #003366;"><strong>وموظفيها وموظفي مركز الوزارة الملتحقين بالدراسة المسائية بما لا يزيد عن (50 %) </strong></span></p>
+    <p><span style="color: #003366;"><strong>خمسين من المئة من الاجور المعتمدة.</strong></span></p>
+    <ol start="7">
+    <li><span style="color: #003366;"><strong> تخفض أجور الدراسة المسائية بنسبة 50 % للطالب الاول على القسم، و30 % للطالب </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>الثاني على القسم، و20 % للطالب الثالث على القسم للسنة الدراسية اللاحقة، وللهيئة </strong></span></p>
+    <p><span style="color: #003366;"><strong>المشرفة على الدراسة المسائية صالحية التخفيض على وفق التعليمات.</strong></span></p>
+    <ol start="4">
+    <li><span style="color: #003366;"><strong> لا يتم استيفاء الاجور الد ارسية الا بعد التأكد من كون قبول الطالب أو استمراره بالدراسة </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>مطابقا للتعليمات والضوابط النافذة وبخالفه تتحمل الكلية والمعهد المسؤولية كاملة.</strong></span></p>
+    <ol start="5">
+    <li><span style="color: #003366;"><strong> في حال انسحاب الطالب من الدراسة و ألي سبب كان أو تأجيله للدراسة ال تعاد الاجور </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>الدراسية لتلك السنة وتستوفى منه الاجور المقررة عند تسجيل دوامة في السنة التالية.</strong></span></p>
+    <ol start="6">
+    <li><span style="color: #003366;"><strong> تتولى الهيئة المشرفة على الدراسة المسائية النظر بتخفيض الاجور الدراسية ألعضاء </strong></span></li>
+    </ol>
+    <p><span style="color: #003366;"><strong>الهيئة التدريسية في الجامعات أو الجامعات التقنية ( المستمرين في الخدمة فقط) وأوالدهم </strong></span></p>
+    <p><span style="color: #003366;"><strong>وموظفيها وموظفي مركز الوزارة الملتحقين بالدراسة المسائية بما لا يزيد عن (50 %) </strong></span></p>
+    <p><span style="color: #003366;"><strong>خمسين من المئة من الاجور المعتمدة.</strong></span></p>
+    <ol start="7">
+    <li><span style="color: #003366;"><strong> تخفض أجور الدراسة المسائية بنسبة 50 % للطالب الاول على القسم، و30 % للطالب الثاني على القسم، و20 % للطالب الثالث على القسم للسنة الدراسية الالحقة، وللهيئة المشرفة على الدراسة المسائية صالحية التخفيض على وفق التعليمات.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يتم تشكيل لجان مستقلة خاصة بقبول الطلبة في الكليات والمعاهد على أن يكون أعضاؤ ها من ذوي الخبرة بتعليمات القبول وضوابطه في الدراسة المسائية وتتحمل هذه اللجان المسؤولية كاملة في حال حدوث أي خلل، ويكون تشكيلها شرطا أساسيا لفتح باب القبول في الدراسات المسائية، ويتولى قسم شؤون الطلبة في رئاسة الجامعة مراقبة عمل هذه اللجان وتقويمها. وتقوم الكلية/الجامعة بمحاسبة كل من يحاول الضغط على هذه اللجان.</strong></span></li>
+    <li><span style="color: #003366;"><strong> يحق لابناء أعضاء الهيئة التدريسية من حملة الالقاب العلمية (أستاذ وأستاذ مساعد ومدرس) اختيار القسم (الفرع) في حال قبولهم حسب مجموعهم في السنة الدراسية الاولى أسوة بأقرانهم المقبولين في الدراسة الصباحية في حالة عدم استفادتهم من الامتياز المذكور في الدراسة الصباحية مع الالتزام بماجاء في الفقرة (2/ب) من البند(ح-6).</strong></span></li>
+    <li><span style="color: #003366;"><strong> تصدر الاوامر الجامعية كافة والمتعلقة بقبول الطلبة في موعد أقصاه 31/12 من كل عام.</strong></span></li>
+    <li><span style="color: #ff0000;"><strong>للتقديم الى الدراسة المسائية في كليات جامعة بغداد ومعرفة اخر التحديثات حول الضوابط والكليات المفتوحة واسعار الاقساط يرجى زيارة الرابط التالي <a href="https://graduation.uobaghdad.edu.iq/?p=19075">من هنـــا</a></strong> </span></li>
+    <li>
+    <h4><span style="font-size: 18px; color: #ff0000;"><strong>ملاحظة مهمة : الضوابط اعلاه خاضعة للتغير من قبل وزارة التعليم العالي والبحث العلمي والتي تنشره في دليل اجراءات شؤون الطلبة وضوابط القبول وشروطه وحسب كل سنة الدراسية</strong></span></h4>
+    <h4></h4>
+    </li>
+    </ol>
+    </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal 3 -->
+<!-- end box3 -->
+
+
+
+
+<!-- Box 4 -->
+<div class="box" data-toggle="modal" data-target="#Modal4">
+  <div class="boxContent">
+    <i class="fa-solid fa-star icon"></i>
+    <h1 class="title">نصائح</h1>
+    <p class="desc">نصائح عامة مفيدة</p>
+  </div>
+</div>
+<!-- Modal 4 -->
+<div class="modal fade" id="Modal4" tabindex="-1" aria-labelledby="ModalLabel4" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="ModalLabel3">نصائح عامة</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <ol dir="rtl" style="text-align: right; padding: 12px;">
+    <li>يجب عليك تحديد مجموعك او معدلك ومعرفته بالضبط وان لم تستطع من ذلك بسبب الدور الثاني فلابد لك من تقدير معدلك ...حسب ما تتوقعه من اجابتك في الامتحان لحين ظهور نتائج الامتحانات للدور الثاني .. .</li>
+    <li>ثم بعد ذلك وباستعانتك بدرجات القبول للسنة الماضية ( الحدود الدنيا للسنوات السابقة ) وهي متوفرة لدينا تقوم بما يلي</li>
+    <li>بعد قيامك بالخطوة رقم 2 تاتي للقائمة التي كونتها وتبدأ باستبعاد اي كلية او معهد لا ترغب في دراسته وحاول قدر الامكان ان يكون الاستبعاد لاسباب مقبولة ومقنعة.....</li>
+    <li>ستتبقى لديك فقط اسماء الكليات التي حضيت برضاك انت....وما عليك عندها الا ان تعيد ترتيبها.حسب ما يناسب رغبتك....والافضل هنا ان لا يقل عددها عن 30 اختيار لتضمن ظهور احدها</li>
+    <li>اذا كان عدد الكليات التي نالت رضاك قليل جدا...فلا تكمل الاختيارات عشوائيا بل ارجع للكليات المستبعدة واختر منها</li>
+    <li>في حال اكمالك الخطوات السابقة وتعيينك 30 كلية للاختيار فما فوق وبقيت لديك اختيارات فارغة يجب ادراجها</li>
+    <li>بعد اكمالك وانتهائك من تحديد الاختيارات لا باس من اخذ مشورة من له خبرة في الموضوع ..لانك ستجد عندهم ملاحظات مفيدة لك</li>
+</ol>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal 4 -->
+<!-- end box4 -->
+
+
+<!-- Box 5 -->
+<div class="box" data-toggle="modal" data-target="#Modal5">
+  <div class="boxContent">
+    <i class="fa-solid fa-globe icon"></i>
+    <h1 class="title">حسابات وزارة التعليم والجامعات</h1>
+    <p class="desc">سوف تجد حسابات ومواقع وزارة التعليم والجامعات</p>
+  </div>
+</div>
+<!-- Modal 5 -->
+<div class="modal fade" id="Modal5" tabindex="-1" aria-labelledby="ModalLabel5" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="ModalLabel3">الحسابات</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="social-media-dashboard sm_scroll_down" style="display: block;">
+    <ul>
+      <!-- Facebook -->
+      <li class="fb">
+        <a href="https://www.facebook.com/Ministry.Official.Page" target="_blank">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+  
+      <!-- Telegram -->
+      <li class="tl">
+        <a href="https://t.me/mohesr_official_channel" target="_blank">
+          <i class="fab fa-telegram"></i>
+        </a>
+      </li>
+  
+      <!-- Twitter -->
+      <li class="tw">
+        <a href="https://twitter.com/mohesr_gov_iq" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+  
+      <!-- Instagram -->
+      <li class="in">
+        <a href="https://www.instagram.com/ministry.official.page/" target="_blank">
+          <i class="fab fa-instagram"></i>
+        </a>
+      </li>
+  
+      <!-- YouTube -->
+      <li class="yo">
+        <a href="https://www.youtube.com/channel/UCwo-RkV2QvzQTewWICpE7KA" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal 5 -->
+<!-- end box 5 -->
+      
+
+
+<!-- Box 6 -->
+<div class="box" data-toggle="modal" data-target="#Modal6">
+  <div class="boxContent">
+    <i class="fa-solid fa-pen icon"></i>
+    <h1 class="title">التقديم المباشر</h1>
+    <p class="desc">معلومات حول التقديم المباشر</p>
+  </div>
+</div>
+<!-- Modal 6 -->
+<div class="modal fade" id="Modal6" tabindex="-1" aria-labelledby="ModalLabel6" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="ModalLabel3">التقديم المباشر</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="paragraphs" id="description">
+    <p>
+        </p><p class="MsoNormal" dir="RTL" style="text-align: justify; "><span lang="AR-IQ" style="line-height: 107%;">حددت وزارة التعليم العالي والبحث
+العلمي يوم الثلاثاء الموافق 2023/8/15 موعدا لبدء التقديم الى قناة القبول
+المباشر للسنة الدراسية 2024/2023.<o:p></o:p></span></p><p class="MsoNormal" dir="RTL" style="text-align: justify;">وأوضحت دائرة الدراسات والتخطيط
+والمتابعة أن التقديم ينتهي في 2023/9/7 ليبدأ بعد ذلك إجراء الاختبارات التي
+تستمر من تاريخ 2023/9/10 الى لغاية 2023/9/14 للتخصصات المشمولة بالقبول المباشر
+في الكليات لخريجي الدراسة الإعدادية من فروع الإحيائي والتطبيقي والأدبي والفنون
+والمهني والإسلامي.</p><p class="MsoNormal" dir="RTL" style="text-align: justify;">وتابعت أن الكليات المعنية بقناة
+القبول المباشر هي كليات وأقسام التربية البدنية وعلوم الرياضة وكليات الفنون
+الجميلة وأقسام التربية الفنية وأقسام اللغة الكردية في الجامعات (عدا جامعة
+كركوك) وأقسام اللغة التركية وقسم رياض الأطفال وقسم التربية الاسرية والمهن
+الفنية في كليات التربية الاساسية وكليات العلوم الإسلامية والفقه وقسم الاقتصاد
+المنزلي في الجامعات وكلية الفنون التطبيقية/الجامعة التقنية الوسطى</p>
+<p class="MsoNormal" dir="RTL" style="text-align: justify;">
+  <span lang="AR-IQ" style="line-height: 107%;">&nbsp;</span></p>
+  <p class="MsoNormal" dir="RTL" style="text-align: center;">
+    <span lang="AR-IQ" style="line-height: 107%;">
+</span></p>
+
+
+</p>
+
+
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal 6 -->
+<!-- end box 6 -->
+
+
+
+
+
+
+
+<!-- Box 7 -->
+<div class="box" data-toggle="modal" data-target="#Modal7">
+  <div class="boxContent">
+    <i class="fa-solid fa-city icon"></i>
+    <h1 class="title">التعيين المركزي</h1>
+    <p class="desc">الاقسام العلمية التي يتم فيها التعيين بشكل مركزي</p>
+  </div>
+</div>
+<!-- Modal 7 -->
+<div class="modal fade" id="Modal7" tabindex="-1" aria-labelledby="ModalLabel7" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="ModalLabel3">التعيين المركزي</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div style="padding: 12px;">
+    <h1 class="mb-4 rtl-label">الكليات والمعاهد المشمولة بالتعيين المركزي</h1>
+    <ol class="rtl">
+        <li>كلية الطب العام</li>
+        <li>كلية طب الأسنان</li>
+        <li>كلية الصيدلة</li>
+        <li>كلية التمريض</li>
+        <li>تقنيات الأدلة الجنائية</li>
+        <li>تقنيات البصريات</li>
+        <li>تقنيات صناعة الأسنان</li>
+        <li>تقنيات التحليلات المرضية</li>
+        <li>تقنيات التخدير</li>
+        <li>تقنيات الأشعة</li>
+        <li>معهد الصحة العالي</li>
+        <li>معهد تقنيات الإدارة الصحية</li>
+        <li>معهد تقنيات الصيدلة</li>
+        <li>معهد صحة المجتمع</li>
+        <li>معهد التمريض</li>
+        <li>معهد الإسعافات</li>
+        <li>المعهد الطبي / التحليلات المرضية</li>
+        <li>معهد الطبي فحص البصر</li>
+    </ol>
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal 7 -->
+<!-- end box 7 -->
+
+
+<!-- Box 8 -->
+<div class="box" data-toggle="modal" data-target="#Modal8">
+  <div class="boxContent">
+    <i class="fa-solid fa-trophy icon"></i>
+    <h1 class="title">الاوائل</h1>
+    <p class="desc">معلومات عن معاملة العشرة الاوائل</p>
+  </div>
+</div>
+<!-- Modal 8 -->
+<div class="modal fade" id="Modal8" tabindex="-1" aria-labelledby="ModalLabel8" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content">
+<div class="modal-header">
+  <h5 class="modal-title" id="ModalLabel3">الطلبة الاوائل</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div style="padding: 12px;">
+    <h1 class="rtl">تعامل الحكومة مع الطلبة الأوائل في الصف السادس الإعدادي</h1>
+    <ul class="rtl">
+        <li>تكريم الطلبة الأوائل بتنظيم حفلات ومنحهم جوائز تشجيعية.</li>
+        <li>تقديم الدعم المالي والمعنوي للطلبة الأوائل من خلال منح دراسية أو مساعدات مالية.</li>
+        <li>تشجيع الطلبة الأوائل على الابتكار والبحث العلمي من خلال برامج ومشاريع خاصة.</li>
+        <li>توجيه وإرشاد الطلبة الأوائل نحو اختيار التخصصات الجامعية أو المهنية المناسبة.</li>
+        <li>تحفيز المدارس لتحقيق التميز الأكاديمي من خلال برامج ومبادرات تحفيزية.</li>
+    </ul>
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  
+</div>
+</div>
+</div>
+</div>
+<!-- End Modal 8 -->
+<!-- end box 8 -->
+
+
+      
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script>
+  $(document).ready(function(){
+    var inputLabels = ['اسلامية', 'احياء', 'كيمياء', 'فيزياء', 'رياضيات', 'انكليزي', 'عربي'];
+              $('#inputContainer').empty(); 
+              $.each(inputLabels, function(index, label){
+                  $('#inputContainer').append('<div class="form-group">' +
+                                                  '<label class="rtl-label fs-lg" for="input' + (index + 1) + '">' + label + '</label>' +
+                                                  '<input type="text" class="form-control rtl-label inputField" id="input' + (index + 1) + '">' +
+                                              '</div>');
+              });
+      
+      
+      $('#customSwitch1').change(function(){
+          if($(this).is(':checked')){
+            var inputLabels = ['اسلامية', 'تاريخ', 'جغرافيا', 'اقتصاد', 'رياضيات', 'انكليزي', 'عربي'];
+              $('#inputContainer').empty(); 
+              $.each(inputLabels, function(index, label){
+                  $('#inputContainer').append('<div class="form-group">' +
+                                                  '<label class="rtl-label fs-lg" for="input' + (index + 1) + '">' + label + '</label>' +
+                                                  '<input type="text" class="form-control rtl-label inputField" id="input' + (index + 1) + '">' +
+                                              '</div>');
+              });
+          } else {
+              $('#inputContainer').empty(); 
+              var inputLabels = ['اسلامية', 'احياء', 'كيمياء', 'فيزياء', 'رياضيات', 'انكليزي', 'عربي'];
+              
+              $('#inputContainer').empty(); 
+              $.each(inputLabels, function(index, label){
+                  $('#inputContainer').append('<div class="form-group">' +
+                                                  '<label class="rtl-label fs-lg" for="input' + (index + 1) + '">' + label + '</label>' +
+                                                  '<input type="text" class="form-control rtl-label inputField" id="input' + (index + 1) + '">' +
+                                              '</div>');
+              });
+
+          }
+      });
+
+      $('#calculateAvgBtn').click(function(){
+    var total = 0;
+    var count = 0;
+    var additionalAvg = 0;
+
+    const examChecked = $('#exam').is(':checked');
+    const noFailChecked = $('#no_fail').is(':checked');
+    const marChecked = $('#mar').is(':checked');
+    const currentAvg = parseFloat($('#avgResult').text().split(': ')[1]);
+
+    if (examChecked) {
+        additionalAvg += 1;
+    }
+    if (noFailChecked) {
+        additionalAvg += 1;
+    }
+    if (marChecked && currentAvg > 90) {
+        additionalAvg += 5;
+    } else if (marChecked) {
+        additionalAvg += 7;
+    }
+
+    $('.inputField').each(function(){
+        var value = parseFloat($(this).val());
+        if(!isNaN(value)){
+            total += value;
+            count++;
+        }
+    });
+    var average = (total / count) + additionalAvg;
+    $('#avgResult').text('المعدل: ' + average.toFixed(2));
+});
+    
+  });
+  </script>
+
+  </body>
+</html>

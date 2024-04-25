@@ -1,0 +1,160 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNIVERSITY GUIDE</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+    <!-- Unicons CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <style>
+      .rtl{
+        direction: rtl;
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(24, 99, 88);box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);padding-left: 60px;padding-right: 60px;">
+      <h2 class="navbar-brand logo text-white">UNIVERSITY GUIDE</h2>
+    
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="uil uil-bars text-white"></i>
+      </button>
+    
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item active">
+                <a class="nav-link text-white" href="{% url 'index' %}">الصفحة الرئيسية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'univs' %}">جميع الجامعات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'h_basied' %}">دليلك للاختيار</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'news_posts' %}">الاخبار</a>
+              </li>
+            </ul>
+    
+        <form class="form-inline my-2 my-lg-0">
+          <i class="uil uil-search search-icon text-white" id="searchIcon" style="font-size: x-large;"></i>
+          <div class="search-box collapse">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search" style="width: 309px;">
+          </div>
+        </form>
+      </div>
+    </nav>
+
+
+    
+      <script>
+        $(document).ready(function() {
+          $('.search-icon').click(function() {
+            var $searchBox = $(this).closest('.form-inline').find('.search-box');
+            $searchBox.collapse('toggle');
+          });
+        });
+      </script>
+
+
+
+
+    <div dir="rtl" class="main">
+    
+        <ul class="cards">
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="{% static 'imgs/f2.webp' %}"></div>
+              <div class="card_content">
+                <h2  class="card_title rtl">الجامعات العراقية </h2>
+                <p class="card_text rtl" > جميع اسماء ومعلومات الجامعات العراقية الحكومية والاهلية مع الكليات والاقسام كافه</p>
+                <a href="{% url 'univs' %}"><button class="btn card_btn">دخول</button></a>
+              </div>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="{% static 'imgs/f3.webp' %}"></div>
+              <div class="card_content">
+                <h2 class="card_title rtl">دليلك للاختيار </h2>
+                <p class="card_text rtl">تساعدك هذه الخدمة في اختيار القسم المناسب لك حسب المعدل والاختصاصات المفضلة </p>
+                <a href="{% url 'h_basied' %}"><button class="btn card_btn">دخول</button></a>
+              </div>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="{% static 'imgs/f1.webp' %}"></div>
+              <div class="card_content">
+                <h2 class="card_title rtl">الاخبار العامة </h2>
+                <p class="card_text rtl">احدث الاخبار المتعلقة بوزارة التعليم العالي والبحث العلمي فيما يخص القبول ودليل الجامعات</p>
+                <a href="{% url 'news_posts' %}"><button class="btn card_btn">دخول</button></a>
+              </div>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="{% static 'imgs/f1.webp' %}"></div>
+              <div class="card_content">
+                <h2 class="card_title rtl">نصائح عامة</h2>
+                <p class="card_text rtl">نقدم نصائح مفيدة وموارد تعليمية للطلاب والطلاب الجدد، لمساعدتهم في النجاح الأكاديمي والمهني.</p>
+                <a href="{% url 'advices' %}"><button class="btn card_btn">دخول</button></a>
+              </div>
+            </div>
+          </li>
+         
+        </ul>
+      </div>
+      <section id="about-us" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-4" style="
+    text-align: left;
+    direction: rtl;
+">
+                    <div class="card border-0 rounded-0 shadow-lg">
+                        <div class="card-body text-center">
+                            <h2 class="card-title text-uppercase text-primary mb-4">من نحن</h2>
+                            <p class="card-text text-muted">نحن موقع يقدم دليلًا شاملًا لجميع الجامعات في العراق، سواء الحكومية أو الأهلية. يهدف موقعنا إلى توفير معلومات دقيقة ومحدثة حول الكليات والأقسام المختلفة في الجامعات، لمساعدة الطلاب في اختيار الدراسات العليا التي تناسب ميولهم وأهدافهم المهنية.</p>
+                            <p class="card-text text-muted">بالإضافة إلى ذلك، نقدم مجموعة من الأخبار العامة حول التعليم والتعلم في العراق، ونقدم نصائح مفيدة وموارد تعليمية للطلاب والطلاب الجدد، لمساعدتهم في النجاح الأكاديمي والمهني.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card border-0 rounded-0 shadow-lg">
+                        <div class="card-body text-center">
+                            <h2 class="card-title text-uppercase text-primary mb-4">خدماتنا</h2>
+                            <ul class="list-unstyled text-muted mb-0" style="
+    text-align: right;
+    direction: rtl;
+">
+                                <li class="mb-3"><i class="fas fa-check-circle text-success mr-2"></i> توفير معلومات شاملة عن الجامعات والكليات في العراق.</li>
+                                <li class="mb-3"><i class="fas fa-check-circle text-success mr-2"></i> مساعدة الطلاب في اختيار الدراسات العليا المناسبة لهم.</li>
+                                <li class="mb-3"><i class="fas fa-check-circle text-success mr-2"></i> نشر أخبار وأحداث تعليمية هامة.</li>
+                                <li><i class="fas fa-check-circle text-success mr-2"></i> تقديم نصائح وموارد تعليمية للمساعدة في مسار التعليم.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+  </body>
+</html>

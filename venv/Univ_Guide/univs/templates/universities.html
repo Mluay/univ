@@ -1,0 +1,177 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNIVERSITY GUIDE</title>
+    <!-- <link rel="stylesheet" href="css/nav.css" /> -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'css/univ.css' %}" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .collapse-button {
+          margin-bottom: 10px; 
+        }
+      </style>
+  <style>
+    /* Custom CSS for RTL text */
+    .rtl-label {
+      direction: rtl;
+      text-align: right; /* Align text to the right */
+    }
+  </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(24, 99, 88);box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);padding-left: 60px;padding-right: 60px;">
+      <h2 class="navbar-brand logo text-white">UNIVERSITY GUIDE</h2>
+    
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="uil uil-bars text-white"></i>
+      </button>
+    
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item active">
+                <a class="nav-link text-white" href="{% url 'index' %}">الصفحة الرئيسية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'univs' %}">جميع الجامعات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'h_basied' %}">دليلك للاختيار</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'news_posts' %}">الاخبار</a>
+              </li>
+            </ul>
+    
+        <form class="form-inline my-2 my-lg-0">
+          <i class="uil uil-search search-icon text-white" id="searchIcon" style="font-size: x-large;"></i>
+          <div class="search-box collapse">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search" style="width: 309px;">
+          </div>
+        </form>
+      </div>
+    </nav>
+      
+      <script>
+        $(document).ready(function() {
+          $('.search-icon').click(function() {
+            var $searchBox = $(this).closest('.form-inline').find('.search-box');
+            $searchBox.collapse('toggle');
+          });
+        });
+      </script>
+      
+      
+      
+      
+      
+
+    <div class="container main">
+        <div class="row">
+            <div class="col">
+              <div class="form-group rtl-label">
+                <label for="exampleSelect1" class="rtl-label" dir="rtl">الجامعات:</label>
+                <select class="custom-select" id="Select1">
+                  <option value="0">الكل</option>
+                  <option value="g">الحكومية</option>
+                  <option value="p">الاهلية</option>
+                </select>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group rtl-label">
+                <label for="exampleSelect2">المحافظات:</label>
+                <select class="custom-select" id="Select2">
+                  <option value="0">الكل</option>
+                  {% for c in cities%}
+                  <option value="{{c.cid}}">{{c.name}}</option>
+                  {% endfor %}
+
+                </select>
+              </div>
+            </div>
+          </div>
+
+        <div class="row">
+
+
+          {% for university in universities %}
+<div class="col-md-4 univ{{university.utype}} city{{university.city_id}}">
+    <button class="btn btn-secondary collapse-button univ-btn" type="button" data-toggle="collapse" data-target="#collapse{{university.uid}}" aria-expanded="false" aria-controls="collapse{{university.uid}}">
+        <span class="fas fa-chevron-down mr-2" style="position: absolute; left: 47px;"></span>
+        {{ university.name }}
+    </button>
+    <div class="collapse" id="collapse{{university.uid}}">
+        <div class="card card-body">
+            <!-- Nested Collapse -->
+            {% for college in university.colleges %}
+            <button class="btn btn-secondary collapse-button" type="button" data-toggle="collapse" data-target="#nestedCollapse{{college.cid}}" aria-expanded="false" aria-controls="nestedCollapse{{college.cid}}">
+                <span class="fas fa-chevron-down mr-2" style="position: absolute; left: 47px;"></span>
+                {{ college.name }}
+            </button>
+            <div class="collapse" id="nestedCollapse{{college.cid}}">
+                <ul class="list-group">
+                    {% for department in college.departments %}
+                    <li class="list-group-item text-center">
+                      {{ department.name }}  {{ department.avg }}
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <!-- End Nested Collapse -->
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+              
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+      $('#Select1, #Select2').change(function() {
+        var univValue = $('#Select1').val(); // Get selected university value
+        var cityValue = $('#Select2').val(); // Get selected city value
+        
+        $('.col-md-4').show();
+        
+        if (univValue !== '0' && cityValue !== '0') {
+        $('.col-md-4').not('.univ' + univValue + '.city' + cityValue).hide();
+      } else if (univValue !== '0') {
+        $('.col-md-4').not('.univ' + univValue).hide();
+      } else if (cityValue !== '0') {
+        $('.col-md-4').not('.city' + cityValue).hide();
+      }
+
+
+      });
+    });
+  </script>
+
+
+
+
+</script>
+  </body>
+</html>

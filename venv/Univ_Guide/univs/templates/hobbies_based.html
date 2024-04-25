@@ -1,0 +1,334 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UNIVERSITY GUIDE</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{% static 'css/univ.css' %}" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .collapse-button {
+          margin-bottom: 10px; 
+        }
+        .btn-send {
+            position: relative;
+            width: 258px;
+            display: flex;
+            justify-content: center;
+            flex-direction: row-reverse;
+            flex-wrap: nowrap;
+            align-items: center;
+        }
+      </style>
+ 
+
+<style>
+    .center {
+      position: absolute;
+      margin-top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .card {
+      margin-bottom: 20px;
+    }
+    .resultsList {
+      position: absolute;
+      width: 100%;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+      border: 1px solid #ccc;
+      border-top: none;
+      z-index: 1;
+    }
+    .resultsList div {
+      padding: 8px;
+      cursor: pointer;
+      background-color: #fff;
+    }
+    .resultsList div:hover {
+      background-color: #f8f9fa;
+    }
+  </style>
+
+<style>
+    .rtl-label {
+      direction:rtl !important;
+      text-align: right !important;
+      display: flex !important;
+      margin-right: 10px !important;
+    }
+    div.send {
+      display: flex;
+      justify-content: center;
+    } 
+  </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(24, 99, 88);box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);padding-left: 60px;padding-right: 60px;">
+      <h2 class="navbar-brand logo text-white">UNIVERSITY GUIDE</h2>
+    
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="uil uil-bars text-white"></i>
+      </button>
+    
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+          <ul class="navbar-nav mx-auto">
+              <li class="nav-item active">
+                <a class="nav-link text-white" href="{% url 'index' %}">الصفحة الرئيسية</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'univs' %}">جميع الجامعات</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'h_basied' %}">دليلك للاختيار</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{% url 'news_posts' %}">الاخبار</a>
+              </li>
+            </ul>
+    
+        <form class="form-inline my-2 my-lg-0">
+          <i class="uil uil-search search-icon text-white" id="searchIcon" style="font-size: x-large;"></i>
+          <div class="search-box collapse">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search here..." aria-label="Search" style="width: 309px;">
+          </div>
+        </form>
+      </div>
+    </nav>
+      
+      <script>
+        $(document).ready(function() {
+          $('.search-icon').click(function() {
+            var $searchBox = $(this).closest('.form-inline').find('.search-box');
+            $searchBox.collapse('toggle');
+          });
+        });
+      </script>
+      
+      
+      
+
+    <div class="container" dir="rtl">
+        <div class="card row justify-content-center">
+          <div class="card-body">
+            <h5 class="card-title rtl-label">املئ المعلومات الاتيه</h5>
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="select1" class="rtl-label">الجامعة:</label>
+                  <select class="form-control" id="select1">
+                    <option value="all">الكل</option>
+                    <option value="g">حكومية</option>
+                    <option value="p">اهلية</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="select2" class="rtl-label">الفرع</label>
+                  <select class="form-control" id="select2">
+                    <option value="b">علمي و ادبي</option>
+                    <option value="s">علمي</option>
+                    <option value="l">ادبي</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="avg" class="rtl-label">المعدل:</label>
+                  <input type="number" name="avg" id="avg" class="form-control">
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body">
+                <div class="form-group position-relative">
+                    <label for="inputAutoSuggest" class="rtl-label">الهوايات:</label>
+                    
+                    <input type="text" class="form-control mt-1 inputAutoSuggest" data-input-id="1" name="h1">
+                    <div class="resultsList" id="resultsList1"></div>
+
+                    <input type="text" class="form-control mt-1 inputAutoSuggest" data-input-id="2" name="h2">
+                    <div class="resultsList" id="resultsList2"></div>
+
+                    <input type="text" class="form-control mt-1 inputAutoSuggest" data-input-id="3" name="h3">
+                    <div class="resultsList" id="resultsList3"></div>
+
+                    <input type="text" class="form-control mt-1 inputAutoSuggest" data-input-id="4" name="h4">
+                    <div class="resultsList" id="resultsList4"></div>
+
+                    <input type="text" class="form-control mt-1 inputAutoSuggest" data-input-id="5" name="h5">
+                    <div class="resultsList" id="resultsList5"></div>
+                  </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-body send">
+                <button class="btn btn-success btn-send">
+                  ارسال
+                </button>
+              </div>
+            </div>
+            <div id="selectedResults" class="rtl-label">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="rtl-label">النتائج</h5>
+                <div class="results">
+                  
+
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Please fill in all required fields.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Bootstrap JS (Optional, if you want to toggle the collapse using JS) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  var suggestions = [
+    {% for h in hobbies %}
+    "{{h.name}}",
+    {% endfor %} 
+  ];
+
+  $('.inputAutoSuggest').on('input', function() {
+    var inputId = $(this).data('input-id');
+    var query = $(this).val().toLowerCase();
+    var matches = suggestions.filter(function(suggestion) {
+      return suggestion.toLowerCase().includes(query);
+    });
+    displayMatches(matches, inputId);
+  });
+
+  $(document).on('click', function(event) {
+    if (!$(event.target).closest('.resultsList').length) {
+        $('.resultsList').hide();
+    }
+});
+
+
+  $(document).on('click', '.resultsList div', function() {
+    var match = $(this).text();
+    var inputId = $(this).parent().attr('id').replace('resultsList', '');
+    $('.inputAutoSuggest[data-input-id="' + inputId + '"]').val(match);
+    $(this).parent().hide();
+  });
+
+  function displayMatches(matches, inputId) {
+    var resultsList = $('#resultsList' + inputId);
+    resultsList.empty();
+
+    if (matches.length > 0) {
+      matches.forEach(function(match) {
+        var suggestionDiv = $('<div>').text(match);
+        resultsList.append(suggestionDiv);
+      });
+
+      resultsList.show();
+    } else {
+      resultsList.hide();
+    }
+  }
+});
+  </script>
+
+
+
+
+<script>
+function addData(data) {
+      $('.results').empty();
+      
+      $.each(data.universities, function(index, item){
+        var card = $('<div class="card"><div class="card-body"><h3>' + item + '</h3></div></div>');
+        $('.results').append(card);
+      });
+    }
+
+    $(document).ready(function(){
+    $(".btn-send").click(function(){
+        var university = $("#select1").val().trim();
+        var branch = $("#select2").val().trim();
+        var average = $("#avg").val().trim();
+        var hobbies = [];
+        $(".inputAutoSuggest").each(function(){
+            var value = $(this).val().trim();
+            if (value !== "") {
+                hobbies.push(value);
+            }
+        });
+
+        if (!university || !branch || !average) {
+            $('#myModal').modal('show'); 
+            return; 
+        }
+
+        var dataToSend = {
+            utype: university,
+            dtype: branch,
+            min_avg: average,
+            hobbies: hobbies
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "{% url 'filter_univ' %}",
+            data: dataToSend,
+            success: function(response){
+                console.log(response);
+                addData(response);
+            },
+            error: function(xhr, status, error){
+                console.error(xhr.responseText);
+            }
+        });
+    });
+});
+  </script>
+
+
+  </body>
+</html>
